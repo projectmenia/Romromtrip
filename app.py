@@ -15,16 +15,21 @@ st.markdown(
         color: #4e6bff;
         margin-top: 20px;
     }
+    .expander-header {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333333;
+    }
     .trip-details {
         font-size: 16px;
         background-color: #f7f7f7;
-        padding: 10px;
+        padding: 15px;
         border-radius: 5px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         margin-top: 10px;
     }
     .details-item {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
         color: #333333;
     }
     .budget {
@@ -53,27 +58,27 @@ if video_button_clicked:
 
 # Date Selection
 if not df.empty:
-    unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
+    unique_dates = df['Date'].dt.strftime("%d %B").unique()
     selected_date = st.selectbox("Select RomRom Trip Date", unique_dates, index=0)
 
     if selected_date != "Select RomRom Trip Date":
         st.markdown("---")  # Add separator line
 
         # Filter data based on selected date
-        selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
+        selected_data = df[df['Date'].dt.strftime("%d %B") == selected_date]
 
         # Display information with improved styling
         if not selected_data.empty:
             st.markdown(f'<p class="selected-date">Selected Date: {selected_date}</p>', unsafe_allow_html=True)
             for index, row in selected_data.iterrows():
                 with st.expander(
-                    f"📅 {row['Date']}, 🏞️ {row['destination']}",
+                    f"<p class='expander-header'>{row['Date']} - {row['destination']}</p>",
                 ):
-                    st.markdown(f"**Source:** {row['source']}")
-                    st.markdown(f"**Mode:** {row['mode']} ({row['mode_value']})")
-                    st.markdown(f"**Where to Stay:** {row['where_to_stay']}")
-                    st.markdown(f"**Places to Visit:** {row['places_to_visit']}")
-                    st.markdown(f"**Total Budget at Destination:** {row['BUDGET']}")
+                    st.markdown(f"<p class='details-item'><strong>Source:</strong> {row['source']}</p>", unsafe_allow_html=True)
+                    st.markdown(f"<p class='details-item'><strong>Mode:</strong> {row['mode']} ({row['mode_value']})</p>", unsafe_allow_html=True)
+                    st.markdown(f"<p class='details-item'><strong>Where to Stay:</strong> {row['where_to_stay']}</p>", unsafe_allow_html=True)
+                    st.markdown(f"<p class='details-item'><strong>Places to Visit:</strong> {row['places_to_visit']}</p>", unsafe_allow_html=True)
+                    st.markdown(f"<p class='budget'><strong>Total Budget at Destination:</strong> {row['BUDGET']}</p>", unsafe_allow_html=True)
 
         else:
             st.warning("No information available for the selected date.")

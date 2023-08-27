@@ -13,29 +13,32 @@ video_button_clicked = st.button("RomRom bhaiyo Click here")
 
 if video_button_clicked:
     video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
-    st.video(video_url, start_time=0)  # Play the video
+    st.video(video_url)
 
-    # Wait for the video to finish playing
-    st.text("Video finished playing. Please continue.")
+    # Add a button to proceed after video ends
+    st.button("See your RomRom trip")
 
     # Date Selection
     if not df.empty:
         unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
+        unique_dates = ['None'] + list(unique_dates)  # Add 'None' option
         selected_date = st.selectbox("Select a date", unique_dates)
 
-        # Filter data based on selected date
-        selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
+        if selected_date != 'None':
+            # Filter data based on selected date
+            selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
 
-        # Display information
-        if not selected_data.empty:
-            st.write(f"Selected Date: {selected_date}")
-            for index, row in selected_data.iterrows():
-                st.write(f"  - Source: {row['source']}")
-                st.write(f"  - Destination: {row['destination']}")
-                st.write(f"  - Mode of Travel: {row['mode']}")
-                st.write(f"  - Budget: {row['BUDGET']}")
-                st.write("----")  # Separate different travel details
+            # Display information
+            if not selected_data.empty:
+                st.write(f"Selected Date: {selected_date}")
+                for index, row in selected_data.iterrows():
+                    st.write(f"  - Source: {row['source']}")
+                    st.write(f"  - Place: {row['destination']}")
+                    st.write(f"  - Mode: {row['mode']} - Budget: {row['BUDGET']}")
+                    st.write("----")  # Separate different travel details
+            else:
+                st.write("No information available for the selected date.")
         else:
-            st.write("No information available for the selected date.")
+            st.write("Please select a date.")
     else:
         st.write("No travel plans available.")

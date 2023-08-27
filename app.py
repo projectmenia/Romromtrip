@@ -11,6 +11,9 @@ st.title("RomRom Trip Planner")
 # Create a placeholder to display content conditionally
 content_placeholder = st.empty()
 
+# Initialize selected_date to 'Select RomRom Trip Date'
+selected_date = 'Select RomRom Trip Date'
+
 # Button to play the video
 video_button_clicked = st.button("Watch RomRom Video")
 

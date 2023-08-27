@@ -3,6 +3,7 @@ import pandas as pd
 
 # Load Excel data from GitHub repository
 excel_url = "https://raw.githubusercontent.com/projectmenia/Romromtrip/main/ram-rom.xlsx"
+df = pd.read_excel(excel_url, engine="openpyxl")  # Load the Excel data
 
 # Video Pop-up
 video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
@@ -38,5 +39,3 @@ if not selected_data.empty:
     st.write(f"Budget: {selected_data['BUDGET'].values[0]}")
 else:
     st.write("No information available for the selected date.")
-
-# You can add more interactive elements, styling, and enhancements as needed

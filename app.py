@@ -22,6 +22,7 @@ st.markdown(
         padding: 10px;
         border-radius: 5px;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        color: #333333;
     }
     .details-item {
         margin-bottom: 5px;
@@ -46,7 +47,7 @@ st.title("RomRom Trip Planner")
 
 # Video Pop-up
 video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
-video_button_clicked = st.button("▶️ RomRom bhaiyo Click here")
+video_button_clicked = st.button("RomRom bhaiyo Click here")
 if video_button_clicked:
     st.video(video_url, start_time=0, format="video/mp4")
 

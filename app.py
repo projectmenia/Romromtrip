@@ -36,7 +36,10 @@ if not df.empty:
             for index, row in selected_data.iterrows():
                 st.write(f"  - Source: {row['source']}")
                 st.write(f"  - Place: {row['destination']}")
-                st.write(f"  - Mode: {row['mode']} - Total Budget: {row['BUDGET']}")  # Display total budget
+                st.write(f"  - Mode: {row['mode']} - Mode Value: {row['mode_value']}")  # Display mode value
+                st.write(f"  - Where to Stay: {row['where_to_stay']}")  # Display where to stay
+                st.write(f"  - Places to Visit: {row['places_to_visit']}")  # Display places to visit
+                st.write(f"  - Total Budget at Destination: {row['BUDGET']}")  # Display total budget
                 st.write("----")  # Separate different travel details
         else:
             st.write("No information available for the selected date.")

@@ -14,27 +14,19 @@ if video_button_clicked:
 # Main App
 st.title("Travel Planner App")
 
-# Display information
+# Display summary of travel plans
 if not df.empty:
-    for index, row in df.iterrows():
-        st.write(f"Date: {row['Date']}")
-        st.write(f"Source: {row['source']}")
-        st.write(f"Destination: {row['destination']}")
-        st.write(f"Mode of Travel: {row['mode']}")
-        
-        # Check if 'where_to_stay' column exists before accessing it
-        if 'where_to_stay' in df.columns:
-            st.write(f"Where to Stay: {row['where_to_stay']}")
-        
-        # Add more information as needed
+    st.write("Upcoming Travel Plans:")
 
-        # Display map if location data is available (assuming 'latitude' and 'longitude' columns)
-        if 'latitude' in df.columns and 'longitude' in df.columns:
-            st.map(df[['latitude', 'longitude']])
-
-        # Display budget information
-        st.write(f"Budget: {row['BUDGET']}")
-
-    st.write("End of data.")
+    # Group by date and display travel details for each date
+    grouped = df.groupby('Date')
+    for date, group in grouped:
+        st.write(f"Date: {date}")
+        for index, row in group.iterrows():
+            st.write(f"  - Mode of Travel: {row['mode']}")
+            st.write(f"  - Source: {row['source']}")
+            st.write(f"  - Destination: {row['destination']}")
+            
+        st.write("----")  # Separate different dates
 else:
-    st.write("No information available.")
+    st.write("No travel plans available.")

@@ -58,21 +58,21 @@ if video_button_clicked:
 
 # Date Selection
 if not df.empty:
-    unique_dates = df['Date'].dt.strftime("%d %B").unique()
+    unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
     selected_date = st.selectbox("Select RomRom Trip Date", unique_dates, index=0)
 
     if selected_date != "Select RomRom Trip Date":
         st.markdown("---")  # Add separator line
 
         # Filter data based on selected date
-        selected_data = df[df['Date'].dt.strftime("%d %B") == selected_date]
+        selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
 
         # Display information with improved styling
         if not selected_data.empty:
             st.markdown(f'<p class="selected-date">Selected Date: {selected_date}</p>', unsafe_allow_html=True)
             for index, row in selected_data.iterrows():
                 with st.expander(
-                    f"<p class='expander-header'>{row['Date']} - {row['destination']}</p>",
+                    f"<p class='expander-header'>{row['Date'].strftime('%d %B %Y')} - {row['destination']}</p>",
                 ):
                     st.markdown(f"<p class='details-item'><strong>Source:</strong> {row['source']}</p>", unsafe_allow_html=True)
                     st.markdown(f"<p class='details-item'><strong>Mode:</strong> {row['mode']} ({row['mode_value']})</p>", unsafe_allow_html=True)

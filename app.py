@@ -26,24 +26,26 @@ if not df.empty:
     unique_dates = ['Select RomRom Trip Date'] + list(unique_dates)  # Add 'Select RomRom Trip Date' option
     selected_date = st.selectbox("Select a date", unique_dates)
 
-    if selected_date == 'Select RomRom Trip Date':
-        total_budget_all_dates = df['BUDGET'].sum()
-        st.write(f"Total Budget for All Dates: {total_budget_all_dates}")
-    elif selected_date:
-        # Filter data based on selected date
-        selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
+    if selected_date:
+        st.markdown("---")  # Add separator line
 
-        # Display information
-        if not selected_data.empty:
-            st.write(f"Selected Date: {selected_date}")
-            for index, row in selected_data.iterrows():
-                st.write(f"  - Source: {row['source']}")
-                st.write(f"  - Destination: {row['destination']}")
-                st.write(f"  - Mode: {row['mode']}")  # Display mode
-                st.write(f"  - Mode Value: {row['mode_value']}")  # Display mode value
-                st.write(f"  - Where to Stay: {row['where_to_stay']}")  # Display where to stay
-                st.write(f"  - Places to Visit: {row['places_to_visit']}")  # Display places to visit
-                st.write(f"  - Total Budget at Destination: {row['BUDGET']}")  # Display total budget
-                st.write("----")  # Separate different travel details
+        if selected_date == 'Select RomRom Trip Date':
+            total_budget_all_dates = df['BUDGET'].sum()
+            st.write(f"**Total Budget for All Dates:** {total_budget_all_dates}")
         else:
-            st.write("No information available for the selected date.")
+            # Filter data based on selected date
+            selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
+
+            # Display information
+            if not selected_data.empty:
+                st.write(f"**Selected Date:** {selected_date}")
+                for index, row in selected_data.iterrows():
+                    st.markdown(f"**Source:** {row['source']}")
+                    st.markdown(f"**Destination:** {row['destination']}")
+                    st.markdown(f"**Mode:** {row['mode']} - **Mode Value:** {row['mode_value']}")
+                    st.markdown(f"**Where to Stay:** {row['where_to_stay']}")
+                    st.markdown(f"**Places to Visit:** {row['places_to_visit']}")
+                    st.markdown(f"**Total Budget at Destination:** {row['BUDGET']}")
+                    st.markdown("---")  # Add separator line
+            else:
+                st.warning("No information available for the selected date.")

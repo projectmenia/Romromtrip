@@ -2,8 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load Excel data from GitHub repository
-excel_url = 'https://github.com/projectmenia/Romromtrip/blob/3e24a04a23a993148c4c38f0edeff3d254a19f81/ram-rom.xlsx'
-df = pd.read_excel(excel_url,engine='openpyxl')
+excel_url = "https://raw.githubusercontent.com/projectmenia/Romromtrip/main/ram-rom.xlsx"
 
 # Video Pop-up
 video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'

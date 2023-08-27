@@ -14,28 +14,23 @@ if video_button_clicked:
 # Main App
 st.title("Travel Planner App")
 
-# Date Selection
-min_date = df['Date'].min()
-max_date = df['Date'].max()
-selected_date = st.date_input("Select a date", min_value=min_date, max_value=max_date)
-
-# Filter data based on selected date
-selected_data = df[df['Date'] == selected_date]
-
 # Display information
-if not selected_data.empty:
-    st.write(f"Date: {selected_date}")
-    st.write(f"Source: {selected_data['source'].values[0]}")
-    st.write(f"Destination: {selected_data['destination'].values[0]}")
-    st.write(f"Mode of Travel: {selected_data['mode'].values[0]}")
-    st.write(f"Where to Stay: {selected_data['where_to_stay'].values[0]}")
-    # Add more information as needed
+if not df.empty:
+    for index, row in df.iterrows():
+        st.write(f"Date: {row['Date']}")
+        st.write(f"Source: {row['source']}")
+        st.write(f"Destination: {row['destination']}")
+        st.write(f"Mode of Travel: {row['mode']}")
+        st.write(f"Where to Stay: {row['where_to_stay']}")
+        # Add more information as needed
 
-    # Display map if location data is available (assuming 'latitude' and 'longitude' columns)
-    if 'latitude' in selected_data.columns and 'longitude' in selected_data.columns:
-        st.map(selected_data[['latitude', 'longitude']])
+        # Display map if location data is available (assuming 'latitude' and 'longitude' columns)
+        if 'latitude' in df.columns and 'longitude' in df.columns:
+            st.map(df[['latitude', 'longitude']])
 
-    # Display budget information
-    st.write(f"Budget: {selected_data['BUDGET'].values[0]}")
+        # Display budget information
+        st.write(f"Budget: {row['BUDGET']}")
+
+    st.write("End of data.")
 else:
-    st.write("No information available for the selected date.")
+    st.write("No information available.")

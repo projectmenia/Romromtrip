@@ -12,7 +12,7 @@ st.title("Interactive Travel App")
 content_placeholder = st.empty()
 
 # Button to play the video
-video_button_clicked = content_placeholder.button("RomRom bhaiyo Click here")
+video_button_clicked = st.button("RomRom bhaiyo Click here")
 
 if video_button_clicked:
     video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
@@ -22,11 +22,11 @@ if video_button_clicked:
     see_trip_button = st.button("See your RomRom trip")
     if see_trip_button:
         content_placeholder.empty()  # Clear the video content
+        st.empty()  # Clear empty placeholder to show next content
 
         # Date Selection
         if not df.empty:
             unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
-            unique_dates = list(unique_dates)  # Remove 'None' option
             selected_date = st.selectbox("Select a date", unique_dates)
 
             if selected_date:

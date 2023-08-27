@@ -22,7 +22,6 @@ if video_button_clicked:
     see_trip_button = st.button("See your RomRom trip")
     if see_trip_button:
         content_placeholder.empty()  # Clear the video content
-        st.empty()  # Clear empty placeholder to show next content
 
         # Date Selection
         if not df.empty:

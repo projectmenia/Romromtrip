@@ -10,26 +10,26 @@ video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-
 st.video(video_url, start_time=0)  # Set start_time=0 to autoplay
 
 # Main App
-st.title("Travel Planner App")
+st.title("Interactive Travel App")
 
-# Display summary of travel plans
+# Date Selection
 if not df.empty:
-    st.write("Upcoming Travel Plans:")
+    unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
+    selected_date = st.selectbox("Select a date", unique_dates)
 
-    # Group by date and display travel details for each date
-    grouped = df.groupby('Date')
-    for date, group in grouped:
-        st.write(f"Date: {date}")
-        st.write("Modes of Travel:")
-        
-        # Create a drop-down for mode of travel
-        selected_mode = st.selectbox("Select mode of travel:", group['mode'].unique())
-        mode_group = group[group['mode'] == selected_mode]
-        
-        for index, row in mode_group.iterrows():
+    # Filter data based on selected date
+    selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
+
+    # Display information
+    if not selected_data.empty:
+        st.write(f"Selected Date: {selected_date}")
+        for index, row in selected_data.iterrows():
             st.write(f"  - Source: {row['source']}")
             st.write(f"  - Destination: {row['destination']}")
-            
-        st.write("----")  # Separate different dates
+            st.write(f"  - Mode of Travel: {row['mode']}")
+            st.write(f"  - Budget: {row['BUDGET']}")
+            st.write("----")  # Separate different travel details
+    else:
+        st.write("No information available for the selected date.")
 else:
     st.write("No travel plans available.")

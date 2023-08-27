@@ -6,18 +6,17 @@ excel_url = "https://raw.githubusercontent.com/projectmenia/Romromtrip/main/ram-
 df = pd.read_excel(excel_url, engine="openpyxl")  # Load the Excel data
 
 # Main App
-st.title("Rom Rom Trip")
+st.title("Interactive Travel App")
 
 # Button to play the video
 video_button_clicked = st.button("RomRom bhaiyo Click here")
 
-# Check if the video button is clicked
 if video_button_clicked:
     video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
-    st.video(video_url, start_time=0)  # Set start_time=0 to autoplay
+    st.video(video_url, start_time=0)  # Play the video
 
-    # Wait for the video to finish
-    st.video(video_url, start_time=0, format="video/mp4", key="video_key")
+    # Wait for the video to finish playing
+    st.text("Video finished playing. Please continue.")
 
     # Date Selection
     if not df.empty:

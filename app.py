@@ -30,7 +30,7 @@ if video_button_clicked:
 if not df.empty:
     unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
     unique_dates = ['Select RomRom Trip Date'] + list(unique_dates)  # Add 'Select RomRom Trip Date' option
-    selected_date = st.selectbox("Select a date", unique_dates, index=0 if selected_date == 'Select RomRom Trip Date' else None)
+    selected_date = st.selectbox("Select RomRom Trip Date", unique_dates, index=0 if selected_date == 'Select RomRom Trip Date' else None)
 
     if selected_date:
         st.markdown("---")  # Add separator line
@@ -42,16 +42,17 @@ if not df.empty:
             # Filter data based on selected date
             selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
 
-            # Display information
+            # Display information with improved styling
             if not selected_data.empty:
-                st.write(f"**Selected Date:** {selected_date}")
+                st.markdown(f"### Selected Date: {selected_date}")
                 for index, row in selected_data.iterrows():
-                    st.markdown(f"**Source:** {row['source']}")
-                    st.markdown(f"**Destination:** {row['destination']}")
-                    st.markdown(f"**Mode:** {row['mode']} - **Mode Value:** {row['mode_value']}")
-                    st.markdown(f"**Where to Stay:** {row['where_to_stay']}")
-                    st.markdown(f"**Places to Visit:** {row['places_to_visit']}")
-                    st.markdown(f"**Total Budget at Destination:** {row['BUDGET']}")
-                    st.markdown("---")  # Add separator line
+                    st.write(f"**Source:** {row['source']}")
+                    st.write(f"**Destination:** {row['destination']}")
+                    st.write(f"**Mode:** {row['mode']}")
+                    st.write(f"**Mode Value:** {row['mode_value']}")
+                    st.write(f"**Where to Stay:** {row['where_to_stay']}")
+                    st.write(f"**Places to Visit:** {row['places_to_visit']}")
+                    st.write(f"**Total Budget at Destination:** {row['BUDGET']}")
+                    st.write("---")  # Add separator line
             else:
                 st.warning("No information available for the selected date.")

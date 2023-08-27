@@ -73,10 +73,8 @@ if not df.empty:
         if not selected_data.empty:
             st.markdown(f'<p class="selected-date">Selected Date: {selected_date}</p>', unsafe_allow_html=True)
             for index, row in selected_data.iterrows():
-                expander = st.expander(
-                    f"<p class='expander-header'>{row['destination']} - {row['Date'].strftime('%d %B %Y')}</p>",
-                    expanded=False,
-                )
+                destination_date = row['destination'] + " - " + row['Date'].strftime('%d %B %Y')
+                expander = st.expander(destination_date, expanded=False)
                 with expander:
                     st.markdown(
                         f"<div class='trip-details'>"

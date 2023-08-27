@@ -5,11 +5,9 @@ import pandas as pd
 excel_url = "https://raw.githubusercontent.com/projectmenia/Romromtrip/main/ram-rom%20%281%29.xlsx"
 df = pd.read_excel(excel_url, engine="openpyxl")  # Load the Excel data
 
-# Video Pop-up
+# Video Pop-up (autoplay)
 video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
-video_button_clicked = st.button("RomRom bhaiyo Click here")
-if video_button_clicked:
-    st.video(video_url)
+st.video(video_url, start_time=0)  # Set start_time=0 to autoplay
 
 # Main App
 st.title("Travel Planner App")
@@ -22,8 +20,13 @@ if not df.empty:
     grouped = df.groupby('Date')
     for date, group in grouped:
         st.write(f"Date: {date}")
-        for index, row in group.iterrows():
-            st.write(f"  - Mode of Travel: {row['mode']}")
+        st.write("Modes of Travel:")
+        
+        # Create a drop-down for mode of travel
+        selected_mode = st.selectbox("Select mode of travel:", group['mode'].unique())
+        mode_group = group[group['mode'] == selected_mode]
+        
+        for index, row in mode_group.iterrows():
             st.write(f"  - Source: {row['source']}")
             st.write(f"  - Destination: {row['destination']}")
             

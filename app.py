@@ -26,7 +26,10 @@ if not df.empty:
     unique_dates = ['Select RomRom Trip Date'] + list(unique_dates)  # Add 'Select RomRom Trip Date' option
     selected_date = st.selectbox("Select a date", unique_dates)
 
-    if selected_date != 'Select RomRom Trip Date':
+    if selected_date == 'Select RomRom Trip Date':
+        total_budget_all_dates = df['BUDGET'].sum()
+        st.write(f"Total Budget for All Dates: {total_budget_all_dates}")
+    elif selected_date:
         # Filter data based on selected date
         selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
 
@@ -42,11 +45,5 @@ if not df.empty:
                 st.write(f"  - Places to Visit: {row['places_to_visit']}")  # Display places to visit
                 st.write(f"  - Total Budget at Destination: {row['BUDGET']}")  # Display total budget
                 st.write("----")  # Separate different travel details
-            total_budget_button = st.button("Calculate Total Budget")
-            if total_budget_button:
-                total_budget = selected_data['BUDGET'].sum()
-                st.write(f"Total Budget for the Trip: {total_budget}")
         else:
             st.write("No information available for the selected date.")
-    else:
-        st.write("Please select a RomRom trip date.")

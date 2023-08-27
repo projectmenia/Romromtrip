@@ -66,11 +66,9 @@ if not df.empty:
         if not selected_data.empty:
             st.markdown(f'<p class="selected-date">Selected Date: {selected_date}</p>', unsafe_allow_html=True)
             for index, row in selected_data.iterrows():
-                expander = st.beta_expander(
+                with st.expander(
                     f"📅 {row['Date']}, 🏞️ {row['destination']}",
-                    expanded=True
-                )
-                with expander:
+                ):
                     st.markdown(f"**Source:** {row['source']}")
                     st.markdown(f"**Mode:** {row['mode']} ({row['mode_value']})")
                     st.markdown(f"**Where to Stay:** {row['where_to_stay']}")

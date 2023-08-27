@@ -20,11 +20,14 @@ if video_button_clicked:
 
     content_placeholder.empty()  # Clear the video content
 
+    # Reset the selected date to default after video is played
+    selected_date = 'Select RomRom Trip Date'
+
 # Date Selection
 if not df.empty:
     unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
     unique_dates = ['Select RomRom Trip Date'] + list(unique_dates)  # Add 'Select RomRom Trip Date' option
-    selected_date = st.selectbox("Select a date", unique_dates)
+    selected_date = st.selectbox("Select a date", unique_dates, index=0 if selected_date == 'Select RomRom Trip Date' else None)
 
     if selected_date:
         st.markdown("---")  # Add separator line

@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load Excel data from GitHub repository
-excel_url = "https://raw.githubusercontent.com/projectmenia/Romromtrip/main/ram-rom.xlsx"
+excel_url = "https://raw.githubusercontent.com/projectmenia/Romromtrip/main/ram-rom%20%281%29.xlsx"
 df = pd.read_excel(excel_url, engine="openpyxl")  # Load the Excel data
 
 # Video Pop-up
@@ -21,7 +21,11 @@ if not df.empty:
         st.write(f"Source: {row['source']}")
         st.write(f"Destination: {row['destination']}")
         st.write(f"Mode of Travel: {row['mode']}")
-        st.write(f"Where to Stay: {row['where_to_stay']}")
+        
+        # Check if 'where_to_stay' column exists before accessing it
+        if 'where_to_stay' in df.columns:
+            st.write(f"Where to Stay: {row['where_to_stay']}")
+        
         # Add more information as needed
 
         # Display map if location data is available (assuming 'latitude' and 'longitude' columns)

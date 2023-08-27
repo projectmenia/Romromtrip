@@ -6,9 +6,10 @@ excel_url = 'https://github.com/projectmenia/Romromtrip/raw/main/RAM-ROM-Sheet1.
 df = pd.read_excel(excel_url)
 
 # Video Pop-up
+video_url = 'https://github.com/projectmenia/Romromtrip/raw/main/rom-rom-bhaiyo-system-paad-denge-deepak-kalal-meme-template-1280-ytshorts.savetube.me.mp4'
 video_button_clicked = st.button("RomRom bhaiyo Click here")
 if video_button_clicked:
-    st.video("URL_OF_YOUR_VIDEO")
+    st.video(video_url)
 
 # Main App
 st.title("Travel Planner App")

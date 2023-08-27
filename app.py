@@ -20,25 +20,25 @@ if video_button_clicked:
 
     content_placeholder.empty()  # Clear the video content
 
-    # Date Selection
-    if not df.empty:
-        unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
-        unique_dates = ['None'] + list(unique_dates)  # Add 'None' option
-        selected_date = st.selectbox("Select a date", unique_dates)
+# Date Selection
+if not df.empty:
+    unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
+    unique_dates = ['None'] + list(unique_dates)  # Add 'None' option
+    selected_date = st.selectbox("Select a date", unique_dates)
 
-        if selected_date != 'None':
-            # Filter data based on selected date
-            selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
+    if selected_date != 'None':
+        # Filter data based on selected date
+        selected_data = df[df['Date'].dt.strftime("%d %B %Y") == selected_date]
 
-            # Display information
-            if not selected_data.empty:
-                st.write(f"Selected Date: {selected_date}")
-                for index, row in selected_data.iterrows():
-                    st.write(f"  - Source: {row['source']}")
-                    st.write(f"  - Place: {row['destination']}")
-                    st.write(f"  - Mode: {row['mode']} - Total Budget: {row['BUDGET']}")  # Display total budget
-                    st.write("----")  # Separate different travel details
-            else:
-                st.write("No information available for the selected date.")
+        # Display information
+        if not selected_data.empty:
+            st.write(f"Selected Date: {selected_date}")
+            for index, row in selected_data.iterrows():
+                st.write(f"  - Source: {row['source']}")
+                st.write(f"  - Place: {row['destination']}")
+                st.write(f"  - Mode: {row['mode']} - Total Budget: {row['BUDGET']}")  # Display total budget
+                st.write("----")  # Separate different travel details
         else:
-            st.write("No date selected.")
+            st.write("No information available for the selected date.")
+    else:
+        st.write("No date selected.")

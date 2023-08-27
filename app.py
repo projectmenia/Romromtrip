@@ -22,6 +22,7 @@ if video_button_clicked:
     see_trip_button = st.button("See your RomRom trip")
     if see_trip_button:
         content_placeholder.empty()  # Clear the video content
+
         # Date Selection
         if not df.empty:
             unique_dates = df['Date'].dt.strftime("%d %B %Y").unique()
@@ -44,5 +45,3 @@ if video_button_clicked:
                     st.write("No information available for the selected date.")
             else:
                 st.write("Please select a date.")
-        else:
-            st.write("No travel plans available.")
